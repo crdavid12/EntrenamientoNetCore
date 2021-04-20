@@ -1,4 +1,7 @@
 using EntrenamientoPeliculas.Data;
+using EntrenamientoPeliculas.PeliculasMapper;
+using EntrenamientoPeliculas.Repository;
+using EntrenamientoPeliculas.Repository.IRepository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +31,8 @@ namespace EntrenamientoPeliculas
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
+            services.AddAutoMapper(typeof(PeliculasMappers));
+            services.AddScoped<ICategoriaRepsitory, CategoriaRepository>();
             services.AddControllers();
         }
 
