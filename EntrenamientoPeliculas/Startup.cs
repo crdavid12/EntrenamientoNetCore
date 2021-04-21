@@ -33,6 +33,7 @@ namespace EntrenamientoPeliculas
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
             services.AddAutoMapper(typeof(PeliculasMappers));
             services.AddScoped<ICategoriaRepsitory, CategoriaRepository>();
+            services.AddScoped<IPeliculaRepository, peliculaRepository>();
             services.AddControllers();
         }
 

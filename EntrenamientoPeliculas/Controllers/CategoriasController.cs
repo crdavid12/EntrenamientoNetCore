@@ -55,7 +55,7 @@ namespace EntrenamientoPeliculas.Controllers
         }
 
         [HttpPost]
-        public IActionResult CrearCategoria([FromBody]CategoriaDto categoriaDto)
+        public IActionResult CrearCategoria([FromForm]CategoriaDto categoriaDto)
         {
             if(categoriaDto == null)
             {
