@@ -13,12 +13,18 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+<<<<<<< HEAD
 using Microsoft.OpenApi.Models;
+=======
+>>>>>>> 7848e1daa08bb3835396b6ad01a0a917586a4b3b
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+<<<<<<< HEAD
 using System.Reflection;
+=======
+>>>>>>> 7848e1daa08bb3835396b6ad01a0a917586a4b3b
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,6 +45,7 @@ namespace EntrenamientoPeliculas
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
             
             services.AddAutoMapper(typeof(PeliculasMappers));
+
             services.AddScoped<ICategoriaRepsitory, CategoriaRepository>();
             services.AddScoped<IPeliculaRepository, peliculaRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
@@ -55,6 +62,7 @@ namespace EntrenamientoPeliculas
                         ValidateAudience = false
                     };
                 });
+<<<<<<< HEAD
 
             //De aqui en adelante configuracion de documentacion de nuestra API
             services.AddSwaggerGen(options =>
@@ -139,6 +147,8 @@ namespace EntrenamientoPeliculas
                 });
 
             });
+=======
+>>>>>>> 7848e1daa08bb3835396b6ad01a0a917586a4b3b
             services.AddControllers();
             //CORS
             services.AddCors();

@@ -13,6 +13,9 @@ namespace EntrenamientoPeliculas.Models
         public string NombreUsuario { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7848e1daa08bb3835396b6ad01a0a917586a4b3b
     }
 }
