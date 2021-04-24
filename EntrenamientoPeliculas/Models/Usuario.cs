@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace EntrenamientoPeliculas.Models
 {
-
-    public class Categoria
-    {   
+    public class Usuario
+    {
         [Key]
         public int Id { get; set; }
-        public string Nombre { get; set; }
-        public DateTime FechaCreacion { get; set; }
-    }
+        public string NombreUsuario { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get; set; }
 
+    }
 }

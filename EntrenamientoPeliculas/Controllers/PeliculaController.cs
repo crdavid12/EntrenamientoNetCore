@@ -2,6 +2,7 @@
 using EntrenamientoPeliculas.Models;
 using EntrenamientoPeliculas.Models.Dtos;
 using EntrenamientoPeliculas.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,8 +14,10 @@ using System.Threading.Tasks;
 
 namespace EntrenamientoPeliculas.Controllers
 {
+    [Authorize]
     [Route("api/Peliculas")]
     [ApiController]
+    [ApiExplorerSettings(GroupName = "APIPeliculas")]
     public class PeliculaController : Controller
     {
         private readonly IPeliculaRepository _pelRepo;
@@ -28,6 +31,7 @@ namespace EntrenamientoPeliculas.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Getpeliculas()
         {
@@ -41,6 +45,8 @@ namespace EntrenamientoPeliculas.Controllers
 
             return Ok(listaPeliculasDto);
         }
+
+        [AllowAnonymous]
         [HttpGet("{peliculaId:int}", Name = "GetPelicula")]
         public IActionResult GetPelicula(int peliculaId)
         {
@@ -56,6 +62,7 @@ namespace EntrenamientoPeliculas.Controllers
             return Ok(itemPeliculaDto);
         }
 
+        [AllowAnonymous]
         [HttpGet("GetPeliculasEnCategoria/{categoriaId:int}")]
         public IActionResult GetPeliculasEnCategoria(int categoriaId)
         {
@@ -75,6 +82,7 @@ namespace EntrenamientoPeliculas.Controllers
             return Ok(itemPeliculaDto);
         }
 
+        [AllowAnonymous]
         [HttpGet("Buscar")]
         public IActionResult BuscarPelicula(string nombre)
         {
@@ -94,6 +102,7 @@ namespace EntrenamientoPeliculas.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error, recuperando la aplicacion");
             }
         }
+
 
         [HttpPost]
         public IActionResult CrearPelicula([FromForm] PeliculaCreateDto peliculaDTO)

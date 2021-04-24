@@ -16,6 +16,9 @@ namespace EntrenamientoPeliculas.PeliculasMapper
             CreateMap<Pelicula, PeliculaDto>().ReverseMap();
             CreateMap<Pelicula, PeliculaCreateDto>().ReverseMap();
             CreateMap<Pelicula, PeliculaUpdateDto>().ReverseMap();
+            CreateMap<Usuario, UsuarioDto>().ReverseMap();
+            CreateMap<Usuario, UsuarioCreateDto>().ReverseMap();
+            CreateMap<Usuario, UsuarioLoginAuthDto>().ReverseMap();
         }
     }
 }

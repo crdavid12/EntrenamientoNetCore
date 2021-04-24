@@ -2,6 +2,7 @@
 using EntrenamientoPeliculas.Models;
 using EntrenamientoPeliculas.Models.Dtos;
 using EntrenamientoPeliculas.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,8 +12,11 @@ using System.Threading.Tasks;
 
 namespace EntrenamientoPeliculas.Controllers
 {
+    [Authorize]
     [Route("api/Categorias")]
     [ApiController]
+    [ApiExplorerSettings(GroupName = "APIPeliculasCategorias")]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class CategoriasController : Controller
     {
         private readonly ICategoriaRepsitory _catRepo;
@@ -23,8 +27,15 @@ namespace EntrenamientoPeliculas.Controllers
             _catRepo = catRepo;
             _mapper = mapper;
         }
-
+        
+        /// <summary>
+        /// Obtener todas las Categorias
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet]
+        [ProducesResponseType(200, Type = typeof(List<CategoriaDto>))]
+        [ProducesResponseType(400)]
         public IActionResult GetCategorias()
         {
             var listaCategorias = _catRepo.GetCategorias();
@@ -39,7 +50,16 @@ namespace EntrenamientoPeliculas.Controllers
             return Ok(listaCategoriasDto);
         }
 
+        /// <summary>
+        /// Obtener categoria por Id
+        /// </summary>
+        /// <param name="categoriaId">Este es el Id de la categoria</param>
+        /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet("{categoriaId:int}", Name = "GetCategoria")]
+        [ProducesResponseType(200, Type =typeof(CategoriaDto))]
+        [ProducesResponseType(404)]
+        [ProducesDefaultResponseType]
         public IActionResult GetCategoria(int categoriaId)
         {
             var itemCategoria = _catRepo.GetCategoria(categoriaId);
@@ -54,8 +74,18 @@ namespace EntrenamientoPeliculas.Controllers
             return Ok(itemCategoriaDto);
         }
 
+        /// <summary>
+        /// Crear una Categoria
+        /// </summary>
+        /// <param name="categoriaDto"></param>
+        /// <returns></returns>
         [HttpPost]
-        public IActionResult CrearCategoria([FromForm]CategoriaDto categoriaDto)
+        [ProducesResponseType(201, Type= typeof(CategoriaDto))]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesDefaultResponseType]
+        public IActionResult CrearCategoria([FromBody]CategoriaDto categoriaDto)
         {
             if(categoriaDto == null)
             {
@@ -79,7 +109,18 @@ namespace EntrenamientoPeliculas.Controllers
             return CreatedAtRoute("GetCategoria", new { categoriaId = categoria.Id }, categoria);
         }
 
+
+        /// <summary>
+        /// Actualizar una categoria
+        /// </summary>
+        /// <param name="categoriaId">Este es el Id de la categoria </param>
+        /// <param name="categoriaDto"></param>
+        /// <returns></returns>
         [HttpPatch("{categoriaId}", Name = "ActualizarCategoria")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesDefaultResponseType]
         public IActionResult ActualizarCategoria(int categoriaId, [FromBody] CategoriaDto categoriaDto)
         {
             if (categoriaDto == null || categoriaDto.Id != categoriaId)
@@ -98,7 +139,18 @@ namespace EntrenamientoPeliculas.Controllers
             return NoContent();
         }
 
+
+        /// <summary>
+        /// Borrar una Categoria
+        /// </summary>
+        /// <param name="categoriaId">Este es el id de la Categoria</param>
+        /// <returns></returns>
         [HttpDelete("{categoriaId:int}", Name = "BorrarCategoria")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesDefaultResponseType]
         public IActionResult BorrarCategoria(int categoriaId)
         {
             if (!_catRepo.ExisteCategoria(categoriaId))

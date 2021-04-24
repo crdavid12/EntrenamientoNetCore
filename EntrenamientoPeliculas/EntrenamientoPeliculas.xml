@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EntrenamientoPeliculas</name>
+    </assembly>
+    <members>
+        <member name="M:EntrenamientoPeliculas.Controllers.CategoriasController.GetCategorias">
+            <summary>
+            Obtener todas las Categorias
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EntrenamientoPeliculas.Controllers.CategoriasController.GetCategoria(System.Int32)">
+            <summary>
+            Obtener categoria por Id
+            </summary>
+            <param name="categoriaId">Este es el Id de la categoria</param>
+            <returns></returns>
+        </member>
+        <member name="M:EntrenamientoPeliculas.Controllers.CategoriasController.CrearCategoria(EntrenamientoPeliculas.Models.Dtos.CategoriaDto)">
+            <summary>
+            Crear una Categoria
+            </summary>
+            <param name="categoriaDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EntrenamientoPeliculas.Controllers.CategoriasController.ActualizarCategoria(System.Int32,EntrenamientoPeliculas.Models.Dtos.CategoriaDto)">
+            <summary>
+            Actualizar una categoria
+            </summary>
+            <param name="categoriaId">Este es el Id de la categoria </param>
+            <param name="categoriaDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EntrenamientoPeliculas.Controllers.CategoriasController.BorrarCategoria(System.Int32)">
+            <summary>
+            Borrar una Categoria
+            </summary>
+            <param name="categoriaId">Este es el id de la Categoria</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
